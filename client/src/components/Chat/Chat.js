@@ -19,8 +19,8 @@ const Chat = ({ location }) => {
         setRoom(room);
         setName(name);
 
-        socket.emit();
-        
+        socket.emit('join', { name, room });
+
     }, [ENDPOINT, location.search]);
 
     return (
