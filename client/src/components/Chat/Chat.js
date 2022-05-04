@@ -4,31 +4,28 @@ import io from "socket.io-client";
 
 import './Chat.css';
 
-const ENDPOINT = 'localhosht:5000';
-
-
 let socket;
 
 const Chat = ({ location }) => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
+    const ENDPOINT = 'localhosht:5000';
 
-  useEffect(() => {
-    const { name, room } = queryString.parse(location.search);
+    useEffect(() => {
+        const { name, room } = queryString.parse(location.search);
 
-    console.log(location.search);
+        socket = io(ENDPOINT);
 
+        setRoom(room);
+        setName(name);
 
-    // socket = io(ENDPOINT);
+        socket.emit();
+        
+    }, [ENDPOINT, location.search]);
 
-    setRoom(room);
-    setName(name)
-
-  });
-
-  return (
-    <h1>Chat</h1>
-  );
+    return (
+        <h1>Chat</h1>
+    );
 }
 
 export default Chat;
