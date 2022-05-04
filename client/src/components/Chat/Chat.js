@@ -9,7 +9,7 @@ let socket;
 const Chat = ({ location }) => {
     const [name, setName] = useState('');
     const [room, setRoom] = useState('');
-    const ENDPOINT = 'localhosht:5000';
+    const ENDPOINT = 'localhost:5000';
 
     useEffect(() => {
         const { name, room } = queryString.parse(location.search);
@@ -19,7 +19,11 @@ const Chat = ({ location }) => {
         setRoom(room);
         setName(name);
 
-        socket.emit('join', { name, room });
+        socket.emit('join', { name, room }, (error) => {
+            if(error) {
+              alert(error);
+            }
+        });
 
     }, [ENDPOINT, location.search]);
 
